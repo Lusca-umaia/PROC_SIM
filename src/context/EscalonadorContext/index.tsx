@@ -5,8 +5,7 @@ import React, { createContext, useContext, useState } from 'react'
 import { Processo } from '../../domain/entities/Processo'
 import type {
   ProcessoAtualAttributes,
-  ProcessoConstructor,
-  ProcessoAttributes
+  ProcessoConstructor
 } from '../../@types/Processo'
 import type { Option } from '../../components/Select/Select'
 import type { TiposDeAlgoritmos } from '../../utils/constants'
