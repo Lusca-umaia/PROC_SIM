@@ -7,7 +7,8 @@ import type { TiposDeAlgoritmos } from '../constants'
 export const sortProcessos = (
   processos: Processo[], // Lista de processos a serem ordenados
   tipo: TiposDeAlgoritmos, // Tipo de algoritmo (FCFS, SJF, SRTF, PRIORITY_NON_PREEMPTIVE, PRIORITY_PREEMPTIVE)
-  processoAtual?: Processo | null // Processo atualmente em execução (opcional)
+  isLiberado: boolean,
+  processoAtual: Processo | null
 ): Processo[] => {
   // Cria uma cópia da lista de processos para evitar mutação direta
   const clone = [...processos]
@@ -17,6 +18,15 @@ export const sortProcessos = (
 
   // Ordena a lista de processos com base no algoritmo especificado
   return clone.sort((a, b) => {
+    // Algoritmo cooperativo - o processo atual é sempre o prioritário
+    if (!isLiberado && processoAtual) {
+      if (processoAtual.id === a.id) {
+        return -1
+      } else if (processoAtual.id === b.id) {
+        return 1
+      }
+    }
+
     switch (tipo) {
       // FCFS (First-Come, First-Served): ordena por momento de criação
       case 'FCFS':

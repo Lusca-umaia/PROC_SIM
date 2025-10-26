@@ -8,7 +8,7 @@ import { contarTrocas } from '../../../utils/functions'
 import InfoTable from '../InfoTable/InfoTable'
 
 const Execution: React.FC = () => {
-  const { schedulerConfiguration } = useEscalonadorContext()
+  const { schedulerConfiguration, processos } = useEscalonadorContext()
 
   const {
     finalizados,
@@ -17,7 +17,9 @@ const Execution: React.FC = () => {
     prontosOuEmExecucao,
     tudoFinalizado,
     programados
-  } = useAlgoritmosDeEscalonamento()
+  } = useAlgoritmosDeEscalonamento({
+    processos
+  })
 
   const tempoMedioDeExecucao = (
     finalizados.reduce(
